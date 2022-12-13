@@ -22,7 +22,7 @@ namespace WebApplication3.Controllers
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> Getcustomers()
+        public async Task<List<Customer>> Getcustomers()
         {
           if (_context.customers == null)
           {

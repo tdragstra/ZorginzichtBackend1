@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZorginzichtBackend.Models;
+using System.Runtime.CompilerServices;
 
 namespace WebApplication3.Controllers
 {
@@ -22,13 +25,15 @@ namespace WebApplication3.Controllers
 
         // GET: api/Policies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Policy>>> Getpolicies()
+        public async Task<List<Policy>> Getpolicies()
         {
-          if (_context.policies == null)
-          {
-              return NotFound();
-          }
-            return await _context.policies.ToListAsync();
+
+            var policies = await _context.policies
+                .Include(x => x.Customer)
+                .Include(z => z.Invoices)
+                .ToListAsync();
+            /*var policies = await _context.policies.Include(x => x.Customer).ThenInclude(y => y.invoices).ToListAsync();*/
+            return policies;
         }
 
         // GET: api/Policies/5
