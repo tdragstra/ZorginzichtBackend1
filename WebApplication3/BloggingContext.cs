@@ -16,11 +16,11 @@ public class BloggingContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // initialise policy data // SEED 
+        // initialise insurance type data // SEED 
         modelBuilder.Entity<InsuranceType>().HasData(
             new InsuranceType { id = 1, name = "Tand", type_name = "Tand" }
         );
-        // initialise policy data // SEED 
+        // initialise invoice data // SEED 
         modelBuilder.Entity<Invoice>().HasData(
             new Invoice { id = 1, costs = 50.25f, created = DateTime.Now, InsuranceTypeId = 1, CustomerId = 1, PolicyId = 1 }
         );
@@ -33,7 +33,7 @@ public class BloggingContext : DbContext
         modelBuilder.Entity<Policy>().HasData(
             new Policy { id = 1, policy_nr = 1, policy_name = "Interpolis 1", insurance = "My insurance", costs = 120.50f, active=true, CustomerId=1}
         );
-        // initialise policy data // SEED 
+        // initialise additinal inssurence data // SEED 
         modelBuilder.Entity<AdditonalInsurrance>().HasData(
             new AdditonalInsurrance { id = 1, name = "Tand 1", max_coverage=500, percentage_coverage=80, InsuranceTypeId=1 }
         );
