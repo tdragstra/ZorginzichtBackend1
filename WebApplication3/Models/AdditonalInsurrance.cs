@@ -11,7 +11,7 @@ namespace ZorginzichtBackend.Models
         // let op als je deze migratie terugdraaid dat je de seeds uit comment. De many-to-many staat in migration.
 
         public ICollection<Policy>? policies { get; set; }
-    
+
         public InsuranceType? InsuranceType { get; set; }
         public int InsuranceTypeId { get; set; }
 

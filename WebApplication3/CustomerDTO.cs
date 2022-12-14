@@ -6,7 +6,7 @@ namespace WebApplication3
 
     {
         public int id { get; set; }
-        public int customer_number { get; set; }
+        public int? customer_number { get; set; }
         public string name { get; set; }
         public string email { get; set; }
         public List<Policy> policies { get; set; }
@@ -17,7 +17,7 @@ namespace WebApplication3
             this.policies = customer.policies;
             this.invoices = customer.invoices;
             this.id= customer.id;
-            this.customer_number= customer.customer_number;
+            this.customer_number = customer.customer_number;
         }
     }
 }
