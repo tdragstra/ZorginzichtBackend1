@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebApplication3.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    partial class BloggingContextModelSnapshot : ModelSnapshot
+    [Migration("20221214120316_add-models-customer-additional")]
+    partial class addmodelscustomeradditional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,48 +72,8 @@ namespace WebApplication3.Migrations
                             id = 1,
                             InsuranceTypeId = 1,
                             costs = 0,
-                            maxcoverage = 250,
+                            maxcoverage = 500,
                             name = "Tand 1"
-                        },
-                        new
-                        {
-                            id = 2,
-                            InsuranceTypeId = 1,
-                            costs = 0,
-                            maxcoverage = 500,
-                            name = "Tand 2"
-                        },
-                        new
-                        {
-                            id = 3,
-                            InsuranceTypeId = 1,
-                            costs = 0,
-                            maxcoverage = 750,
-                            name = "Tand 3"
-                        },
-                        new
-                        {
-                            id = 4,
-                            InsuranceTypeId = 2,
-                            costs = 0,
-                            maxcoverage = 250,
-                            name = "Fysio 1"
-                        },
-                        new
-                        {
-                            id = 5,
-                            InsuranceTypeId = 2,
-                            costs = 0,
-                            maxcoverage = 500,
-                            name = "Fysio 2"
-                        },
-                        new
-                        {
-                            id = 6,
-                            InsuranceTypeId = 2,
-                            costs = 0,
-                            maxcoverage = 750,
-                            name = "Fysio 3"
                         });
                 });
 
@@ -187,12 +150,6 @@ namespace WebApplication3.Migrations
                             id = 1,
                             name = "Tand",
                             typename = "Tand"
-                        },
-                        new
-                        {
-                            id = 2,
-                            name = "Fysio",
-                            typename = "Fysio"
                         });
                 });
 
@@ -237,7 +194,7 @@ namespace WebApplication3.Migrations
                             InsuranceTypeId = 1,
                             PolicyId = 1,
                             costs = 50.25,
-                            created = new DateTime(2022, 12, 14, 13, 7, 54, 172, DateTimeKind.Local).AddTicks(9512)
+                            created = new DateTime(2022, 12, 14, 13, 3, 16, 278, DateTimeKind.Local).AddTicks(519)
                         });
                 });
 

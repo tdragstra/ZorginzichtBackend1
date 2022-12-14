@@ -20,7 +20,8 @@ public class BloggingContext : DbContext
     {
         // initialise insurance type data // SEED 
         modelBuilder.Entity<InsuranceType>().HasData(
-            new InsuranceType { id = 1, name = "Tand", type_name = "Tand" }
+            new InsuranceType { id = 1, name = "Tand", type_name = "Tand" },
+            new InsuranceType { id = 2, name = "Fysio", type_name = "Fysio" }
         );
   
         modelBuilder.Entity<Invoice>()
@@ -44,7 +45,13 @@ public class BloggingContext : DbContext
         );
         // initialise additinal inssurence data // SEED 
         modelBuilder.Entity<AdditonalInsurrance>().HasData(
-            new AdditonalInsurrance { id = 1, name = "Tand 1", max_coverage=500, percentage_coverage=80, InsuranceTypeId=1 }
+            new AdditonalInsurrance { id = 1, name = "Tand 1", max_coverage=250, InsuranceTypeId=1 },
+            new AdditonalInsurrance { id = 2, name = "Tand 2", max_coverage = 500, InsuranceTypeId = 1 },
+            new AdditonalInsurrance { id = 3, name = "Tand 3", max_coverage = 750, InsuranceTypeId = 1 },
+            new AdditonalInsurrance { id = 4, name = "Fysio 1", max_coverage = 250, InsuranceTypeId = 2 },
+            new AdditonalInsurrance { id = 5, name = "Fysio 2", max_coverage = 500, InsuranceTypeId = 2 },
+            new AdditonalInsurrance { id = 6, name = "Fysio 3", max_coverage = 750, InsuranceTypeId = 2 }
+
         );
 
 
