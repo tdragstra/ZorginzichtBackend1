@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -97,7 +98,12 @@ namespace WebApplication3.Controllers
           {
               return Problem("Entity set 'BloggingContext.customers'  is null.");
           }
+
+            customer.policies = new List<Policy>();
+            customer.policies.Add(new Policy { policy_nr = 1, policyname = "Achmea Basis", insurance = "Zorgverzekering", costs = 120.50f, active = true});
+            customer.policies[0].additional_insurances = _context.additional_insurances.Where(insurance => insurance.id == 1).ToList();
             _context.customers.Add(customer);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCustomer", new { id = customer.id }, customer);

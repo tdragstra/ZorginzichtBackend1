@@ -17,6 +17,7 @@ namespace ZorginzichtBackend.Models
 
         public bool active { get; set; } = true;
 
+
         public ICollection<AdditonalInsurrance>? additional_insurances { get; set; }
 
         public int CustomerId { get; set; }
