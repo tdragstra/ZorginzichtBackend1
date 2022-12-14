@@ -15,11 +15,11 @@ namespace ZorginzichtBackend.Models
 
         public float? costs { get; set; } = 0;
 
-        public bool? active { get; set; } = true;
+        public bool active { get; set; } = true;
 
         public ICollection<AdditonalInsurrance>? additional_insurances { get; set; }
 
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
 
         public List<Invoice>? Invoices { get; set; }
