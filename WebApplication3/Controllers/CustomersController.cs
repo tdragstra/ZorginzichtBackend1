@@ -44,14 +44,15 @@ namespace WebApplication3.Controllers
           {
               return NotFound();
           }
-            var customer = await _context.customers.Include(x => x.policies).ThenInclude(z => z.additional_insurances).ThenInclude(z => z.InsuranceType).FirstOrDefaultAsync(i => i.id == id);
-            
+            var customer = await _context.customers.Include(customer => customer.policies).ThenInclude(policies => policies.additional_insurances).ThenInclude(z => z.InsuranceType).FirstOrDefaultAsync(i => i.id == id);
+
+          /*  // extra includes gewoon om te testen, niet nodig.
             await _context.policies
                 .Include(x => x.Customer)
-                .Include(z => z.Invoices)
+                .Include(z => z.Invoices).IgnoreAutoIncludes()
 
-                .ToListAsync();
-            if (customer == null)
+                .ToListAsync();*/
+            if (customer == null )
             {
                 return NotFound();
             }
