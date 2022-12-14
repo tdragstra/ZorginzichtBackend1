@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZorginzichtBackend.Models;
+using WebApplication3.Helpers; 
 
 namespace WebApplication3.Controllers
 {
@@ -63,10 +64,13 @@ namespace WebApplication3.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
+            // Remove updated password
             if (id != customer.id)
             {
                 return BadRequest();
             }
+
+            customer.password = LoginHelper.HashPassword(customer.password);
 
             _context.Entry(customer).State = EntityState.Modified;
 
@@ -94,18 +98,33 @@ namespace WebApplication3.Controllers
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
-          if (_context.customers == null)
-          {
-              return Problem("Entity set 'BloggingContext.customers'  is null.");
-          }
+            if (_context.customers == null)
+            {
+                return Problem("Entity set 'BloggingContext.customers'  is null.");
+            }
 
-            customer.policies = new List<Policy>();
-            customer.policies.Add(new Policy { policy_nr = 1, policyname = "Achmea Basis", insurance = "Zorgverzekering", costs = 120.50f, active = true});
-            customer.policies[0].additional_insurances = _context.additional_insurances.Where(insurance => insurance.id == 1).ToList();
+            // Assign hashed password to customer
+            customer.password = LoginHelper.HashPassword(customer.password);
+
+            // Add default policy to customer
+            customer.policies = new List<Policy>
+            {
+                new Policy {
+                    policy_nr = 1,
+                    policyname = "Achmea Basis",
+                    insurance = "Zorgverzekering",
+                    costs = 120.50f, active = true,
+                    additional_insurances = _context.additional_insurances.Where(insurance => insurance.id == 1).ToList()
+                }
+            };
+
+            // Add new customer to context
             _context.customers.Add(customer);
 
+            // Save changes in context
             await _context.SaveChangesAsync();
 
+            // Return the customer
             return CreatedAtAction("GetCustomer", new { id = customer.id }, customer);
         }
 
