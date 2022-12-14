@@ -22,13 +22,11 @@ namespace WebApplication3.Controllers
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<List<Customer>> Getcustomers()
+        public async Task<List<Customer>> GetCustomers()
         {
-          if (_context.customers == null)
-          {
-              return NotFound();
-          }
-            return await _context.customers.ToListAsync();
+            var customers = await _context.customers.Include(x => x.invoices).ToListAsync();
+            return customers;
+        
         }
 
         // GET: api/Customers/5
@@ -39,8 +37,13 @@ namespace WebApplication3.Controllers
           {
               return NotFound();
           }
-            var customer = await _context.customers.FindAsync(id);
+            var customer = await _context.customers.Include(x => x.policies).ThenInclude(z => z.additional_insurances).ThenInclude(z => z.InsuranceType).FirstOrDefaultAsync(i => i.id == id);
+            
+            await _context.policies
+                .Include(x => x.Customer)
+                .Include(z => z.Invoices)
 
+                .ToListAsync();
             if (customer == null)
             {
                 return NotFound();

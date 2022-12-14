@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebApplication3.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,9 +48,9 @@ namespace WebApplication3.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     policynr = table.Column<int>(name: "policy_nr", type: "int", nullable: false),
-                    policyname = table.Column<string>(name: "policy_name", type: "nvarchar(max)", nullable: false),
-                    insurance = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    costs = table.Column<float>(type: "real", nullable: false),
+                    policyname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    insurance = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    costs = table.Column<float>(type: "real", nullable: true),
                     active = table.Column<bool>(type: "bit", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -106,8 +106,7 @@ namespace WebApplication3.Migrations
                         name: "FK_invoices_customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "customers",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_invoices_insurance_types_InsuranceTypeId",
                         column: x => x.InsuranceTypeId,
@@ -119,7 +118,7 @@ namespace WebApplication3.Migrations
                         column: x => x.PolicyId,
                         principalTable: "policies",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,7 +144,6 @@ namespace WebApplication3.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            
 
             migrationBuilder.InsertData(
                 table: "customers",
@@ -164,17 +162,17 @@ namespace WebApplication3.Migrations
 
             migrationBuilder.InsertData(
                 table: "policies",
-                columns: new[] { "id", "CustomerId", "active", "costs", "insurance", "policy_name", "policy_nr" },
-                values: new object[] { 1, 1, true, 120.5f, "My insurance", "Interpolis 1", 1 });
+                columns: new[] { "id", "CustomerId", "active", "costs", "insurance", "policy_nr", "policyname" },
+                values: new object[] { 1, 1, true, 120.5f, "My insurance", 1, "Interpolis 1" });
 
             migrationBuilder.InsertData(
                 table: "invoices",
                 columns: new[] { "id", "CustomerId", "InsuranceTypeId", "PolicyId", "costs", "created" },
-                values: new object[] { 1, 1, 1, 1, 50.25, new DateTime(2022, 12, 12, 20, 13, 37, 415, DateTimeKind.Local).AddTicks(1314) });
+                values: new object[] { 1, 1, 1, 1, 50.25, new DateTime(2022, 12, 13, 23, 40, 54, 406, DateTimeKind.Local).AddTicks(8134) });
 
             migrationBuilder.InsertData(
                 table: "AdditonalInsurrancePolicy",
-                columns: new[] { "additional_insurancesid", "policiesid" },
+                columns: new[] { "policiesid", "additional_insurancesid" },
                 values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
@@ -206,11 +204,7 @@ namespace WebApplication3.Migrations
                 name: "IX_policies_CustomerId",
                 table: "policies",
                 column: "CustomerId");
-
-       
-
         }
-
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)

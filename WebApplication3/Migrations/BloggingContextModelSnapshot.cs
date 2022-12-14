@@ -33,7 +33,7 @@ namespace WebApplication3.Migrations
 
                     b.HasIndex("policiesid");
 
-                    b.ToTable("AdditonalInsurrancePolicy");
+                    b.ToTable("AdditonalInsurrancePolicy", (string)null);
                 });
 
             modelBuilder.Entity("ZorginzichtBackend.Models.AdditonalInsurrance", b =>
@@ -61,16 +61,14 @@ namespace WebApplication3.Migrations
 
                     b.HasIndex("InsuranceTypeId");
 
-                    b.ToTable("additional_insurances");
+                    b.ToTable("additional_insurances", (string)null);
 
                     b.HasData(
                         new
                         {
                             id = 1,
                             InsuranceTypeId = 1,
-                            maxcoverage = 500,
-                            name = "Tand 1",
-                            percentagecoverage = 80
+                            name = "Tand 1"
                         });
                 });
 
@@ -99,13 +97,12 @@ namespace WebApplication3.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("customers");
+                    b.ToTable("customers", (string)null);
 
                     b.HasData(
                         new
                         {
                             id = 1,
-                            customernumber = 1001,
                             email = "robin@gmail.com",
                             name = "Robin",
                             password = "123"
@@ -128,14 +125,13 @@ namespace WebApplication3.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("insurance_types");
+                    b.ToTable("insurance_types", (string)null);
 
                     b.HasData(
                         new
                         {
                             id = 1,
-                            name = "Tand",
-                            typename = "Tand"
+                            name = "Tand"
                         });
                 });
 
@@ -170,7 +166,7 @@ namespace WebApplication3.Migrations
 
                     b.HasIndex("PolicyId");
 
-                    b.ToTable("invoices");
+                    b.ToTable("invoices", (string)null);
 
                     b.HasData(
                         new
@@ -180,7 +176,7 @@ namespace WebApplication3.Migrations
                             InsuranceTypeId = 1,
                             PolicyId = 1,
                             costs = 50.25,
-                            created = new DateTime(2022, 12, 12, 20, 13, 37, 415, DateTimeKind.Local).AddTicks(1314)
+                            created = new DateTime(2022, 12, 13, 23, 40, 54, 406, DateTimeKind.Local).AddTicks(8134)
                         });
                 });
 
@@ -198,25 +194,23 @@ namespace WebApplication3.Migrations
                     b.Property<bool>("active")
                         .HasColumnType("bit");
 
-                    b.Property<float>("costs")
+                    b.Property<float?>("costs")
                         .HasColumnType("real");
 
                     b.Property<string>("insurance")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("policy_name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("policy_nr")
                         .HasColumnType("int");
 
+                    b.Property<string>("policyname")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("id");
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("policies");
+                    b.ToTable("policies", (string)null);
 
                     b.HasData(
                         new
@@ -226,8 +220,7 @@ namespace WebApplication3.Migrations
                             active = true,
                             costs = 120.5f,
                             insurance = "My insurance",
-                            policyname = "Interpolis 1",
-                            policynr = 1
+                            policyname = "Interpolis 1"
                         });
                 });
 
@@ -262,7 +255,6 @@ namespace WebApplication3.Migrations
                     b.HasOne("ZorginzichtBackend.Models.Customer", "Customer")
                         .WithMany("invoices")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ZorginzichtBackend.Models.InsuranceType", "InsuranceType")

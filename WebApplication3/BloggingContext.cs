@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using ZorginzichtBackend.Models;
@@ -20,6 +22,13 @@ public class BloggingContext : DbContext
         modelBuilder.Entity<InsuranceType>().HasData(
             new InsuranceType { id = 1, name = "Tand", type_name = "Tand" }
         );
+  
+        modelBuilder.Entity<Invoice>()
+            .HasOne(p => p.Customer)
+            .WithMany(b => b.invoices)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+
         // initialise invoice data // SEED 
         modelBuilder.Entity<Invoice>().HasData(
             new Invoice { id = 1, costs = 50.25f, created = DateTime.Now, InsuranceTypeId = 1, CustomerId = 1, PolicyId = 1 }
@@ -31,7 +40,7 @@ public class BloggingContext : DbContext
 
         // initialise policy data // SEED 
         modelBuilder.Entity<Policy>().HasData(
-            new Policy { id = 1, policy_nr = 1, policy_name = "Interpolis 1", insurance = "My insurance", costs = 120.50f, active=true, CustomerId=1}
+            new Policy { id = 1, policy_nr = 1, policyname = "Interpolis 1", insurance = "My insurance", costs = 120.50f, active=true, CustomerId=1}
         );
         // initialise additinal inssurence data // SEED 
         modelBuilder.Entity<AdditonalInsurrance>().HasData(
