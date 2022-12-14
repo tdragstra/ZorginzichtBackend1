@@ -14,7 +14,7 @@ namespace ZorginzichtBackend.Models
 
         public string password { get; set; } = "";
 
-        public List<Policy> policies { get; set; }
-        public List<Invoice> invoices { get; set; }
+        public List<Policy>? policies { get; set; }
+        public List<Invoice>? invoices { get; set; }
     }
 }

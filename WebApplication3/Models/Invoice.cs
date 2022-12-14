@@ -6,7 +6,7 @@
 
         public double costs { get; set; }
 
-        public DateTime? created { get; set; }
+        public DateTime? created { get; set; } = DateTime.Now;
 
 
 

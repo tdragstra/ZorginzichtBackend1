@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebApplication3.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20221212191337_initial")]
-    partial class initial
+    [Migration("20221213224054_initial_create")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,7 +183,7 @@ namespace WebApplication3.Migrations
                             InsuranceTypeId = 1,
                             PolicyId = 1,
                             costs = 50.25,
-                            created = new DateTime(2022, 12, 12, 20, 13, 37, 415, DateTimeKind.Local).AddTicks(1314)
+                            created = new DateTime(2022, 12, 13, 23, 40, 54, 406, DateTimeKind.Local).AddTicks(8134)
                         });
                 });
 
@@ -201,19 +201,17 @@ namespace WebApplication3.Migrations
                     b.Property<bool>("active")
                         .HasColumnType("bit");
 
-                    b.Property<float>("costs")
+                    b.Property<float?>("costs")
                         .HasColumnType("real");
 
                     b.Property<string>("insurance")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("policy_name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("policy_nr")
                         .HasColumnType("int");
+
+                    b.Property<string>("policyname")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
@@ -229,8 +227,8 @@ namespace WebApplication3.Migrations
                             active = true,
                             costs = 120.5f,
                             insurance = "My insurance",
-                            policyname = "Interpolis 1",
-                            policynr = 1
+                            policynr = 1,
+                            policyname = "Interpolis 1"
                         });
                 });
 
@@ -265,7 +263,6 @@ namespace WebApplication3.Migrations
                     b.HasOne("ZorginzichtBackend.Models.Customer", "Customer")
                         .WithMany("invoices")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ZorginzichtBackend.Models.InsuranceType", "InsuranceType")
