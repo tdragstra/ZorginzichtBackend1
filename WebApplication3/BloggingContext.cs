@@ -37,6 +37,7 @@ public class BloggingContext : DbContext
         // initialise customer data // SEED 
         modelBuilder.Entity<Customer>().HasData(
             new Customer { id = 1, customer_number = 1001, name = "Robin", email = "robin@gmail.com", password = "123", postal_code = "5653 LR", address = "Rambam 12", city = "Eindhoven"}
+            new Customer { id = 1, customer_number = 1011, name = "Leonie Mills", email = "leonie@gmail.com", password = "123", postal_code = "5653 LR", address = "Rambam 12", city = "Eindhoven" }
         );
 
         // initialise policy data // SEED 
