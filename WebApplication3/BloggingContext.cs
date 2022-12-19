@@ -37,12 +37,12 @@ public class BloggingContext : DbContext
         // initialise customer data // SEED 
         modelBuilder.Entity<Customer>().HasData(
             new Customer { id = 1, customer_number = 1001, name = "Robin", email = "robin@gmail.com", password = "123", postal_code = "5653 LR", address = "Rambam 12", city = "Eindhoven"}
-            new Customer { id = 1, customer_number = 1011, name = "Leonie Mills", email = "leonie@gmail.com", password = "123", postal_code = "5653 LR", address = "Rambam 12", city = "Eindhoven" }
+           /* new Customer { id = 99, customer_number = 1011, name = "Leonie Mills", email = "leonie@gmail.com", password = "123", postal_code = "5653 LR", address = "Rambam 12", city = "Eindhoven" }*/
         );
 
         // initialise policy data // SEED 
         modelBuilder.Entity<Policy>().HasData(
-            new Policy { id = 1, policy_nr = 1, policyname = "Interpolis 1", insurance = "My insurance", costs = 120.50f, active=true, CustomerId=1},
+            new Policy { id = 1, policy_nr = 1, policyname = "Interpolis 1", insurance = "My insurance", costs = 120.50f, active=true, CustomerId=1}
             /*new Policy { id = 10, policy_nr = 2, policyname = "Achmea Zorg", insurance = "Zorgverzekering", costs = 120.50f, active = true, CustomerId = 1 }*/
         );
         // initialise additinal inssurence data // SEED 
