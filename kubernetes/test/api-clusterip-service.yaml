@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: api-test
+  name: api-test
+spec:
+  ports:
+  - name: 5000-80
+    port: 5000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: api
+  type: ClusterIP
