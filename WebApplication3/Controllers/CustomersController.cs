@@ -27,7 +27,12 @@ namespace WebApplication3.Controllers
         public async Task<List<CustomerDTO>> GetCustomers()
         {
             List<CustomerDTO> customerlist = new List<CustomerDTO>();
-                return customerlist;
+            Customer customer = new Customer();
+            customer.name="versie 1.0.0";
+            CustomerDTO customerDto = new CustomerDTO(customer);
+            customerlist.Add(customerDto);
+
+            return customerlist;
         }
 
         // GET: api/Customers/5
