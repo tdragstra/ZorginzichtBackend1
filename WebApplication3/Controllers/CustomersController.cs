@@ -28,7 +28,7 @@ namespace WebApplication3.Controllers
         {
             List<CustomerDTO> customerlist = new List<CustomerDTO>();
             Customer customer = new Customer();
-            customer.name="versie 1.0.0";
+            customer.name="versie 2.0.0-SNAPSHOT";
             CustomerDTO customerDto = new CustomerDTO(customer);
             customerlist.Add(customerDto);
 
