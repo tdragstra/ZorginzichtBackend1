@@ -27,13 +27,7 @@ namespace WebApplication3.Controllers
         public async Task<List<CustomerDTO>> GetCustomers()
         {
             List<CustomerDTO> customerlist = new List<CustomerDTO>();
-            var customers = await _context.customers.Include(x => x.invoices).ToListAsync();
-            foreach (Customer customer in customers) {
-                CustomerDTO customerDTO = new CustomerDTO(customer);
-                customerlist.Add(customerDTO);
-            }
                 return customerlist;
-        
         }
 
         // GET: api/Customers/5
