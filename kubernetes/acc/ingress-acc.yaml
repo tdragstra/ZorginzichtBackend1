@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-achmea
+  namespace: zorginzicht-acc
 spec:
   rules:
     - host: zorgpolis.acc.docker.achmea.local
@@ -11,6 +12,6 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: api-acc
+                name: ui
                 port:
                   number: 5000
