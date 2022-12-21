@@ -2,10 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-achmea
-  namespace: zorginzicht-test
+  namespace: zorginzicht-acc
 spec:
   rules:
-    - host: zorgpolis.test.docker.achmea.local
+    - host: zorgpolis.acc.docker.achmea.local
       http:
         paths:
           - path: /
