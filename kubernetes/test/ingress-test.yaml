@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-achmea
+spec:
+  rules:
+    - host: zorgpolis.test.docker.achmea.local
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: api-test
+                port:
+                  number: 5000
