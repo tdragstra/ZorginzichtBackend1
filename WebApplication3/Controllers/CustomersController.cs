@@ -36,6 +36,7 @@ namespace WebApplication3.Controllers
         
         }
 
+
         // GET: api/Customers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int id)
@@ -45,6 +46,7 @@ namespace WebApplication3.Controllers
               return NotFound();
           }
             var customer = await _context.customers.Include(customer => customer.policies).ThenInclude(policies => policies.additional_insurances).ThenInclude(z => z.InsuranceType).FirstOrDefaultAsync(i => i.id == id);
+
 
           /*  // extra includes gewoon om te testen, niet nodig.
             await _context.policies
@@ -59,6 +61,33 @@ namespace WebApplication3.Controllers
 
             return customer;
         }
+
+        [HttpGet("version")]
+        public async Task<ActionResult<Customer>> TestCustomer()
+        {
+            if (_context.customers == null)
+            {
+                return NotFound();
+            }
+
+            var customer =  new Customer();
+
+            customer.name = "version 1.0.0";
+
+            /*  // extra includes gewoon om te testen, niet nodig.
+              await _context.policies
+                  .Include(x => x.Customer)
+                  .Include(z => z.Invoices).IgnoreAutoIncludes()
+
+                  .ToListAsync();*/
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
+        }
+
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
