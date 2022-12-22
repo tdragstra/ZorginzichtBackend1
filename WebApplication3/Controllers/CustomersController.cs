@@ -72,7 +72,7 @@ namespace WebApplication3.Controllers
 
             var customer =  new Customer();
 
-            customer.name = "version 1.0.0";
+            customer.name = "version 1.1.0-SNAPSHOT";
 
             /*  // extra includes gewoon om te testen, niet nodig.
               await _context.policies
