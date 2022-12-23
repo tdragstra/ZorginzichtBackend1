@@ -125,6 +125,14 @@ namespace WebApplication3.Controllers
             // Save changes in context
             await _context.SaveChangesAsync();
 
+            Customer newCustomer = _context.customers.OrderBy(customer => customer.id).Last();
+
+            newCustomer.customer_number = 37000 + newCustomer.id;
+
+            _context.Update(newCustomer);
+
+            await _context.SaveChangesAsync();
+
             // Return the customer
             return CreatedAtAction("GetCustomer", new { id = customer.id }, customer);
         }
